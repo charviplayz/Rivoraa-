@@ -1,0 +1,97 @@
+/* ── PRODUCTS PAGE SPECIFIC STYLES ── */
+
+/* ── HERO SECTION OVERRIDES ── */
+.products-hero-section {
+  padding: 140px 60px 80px;
+  background: var(--earth);
+  color: var(--cream);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.products-hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top right, rgba(196,154,60,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.products-hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.products-hero-inner .section-label {
+  color: var(--gold-light);
+  justify-content: center;
+}
+
+.products-hero-inner .section-label::after {
+  background: var(--gold-light);
+}
+
+.products-hero-inner .section-title {
+  color: var(--cream);
+  margin-bottom: 24px;
+}
+
+.products-hero-inner .section-body {
+  color: rgba(245,240,232,0.8);
+  margin: 0 auto 32px;
+}
+
+.products-hero-inner .checks {
+  justify-content: center;
+  margin-top: 32px;
+}
+
+.products-hero-inner .check-tag {
+  background: rgba(44,36,22,0.4);
+  border-color: rgba(196,154,60,0.3);
+  color: var(--cream);
+}
+
+/* ── PRODUCT CARD OVERRIDES FOR PRODUCTS PAGE ── */
+.products-section .products-grid {
+  grid-template-columns: 1fr;
+  gap: 60px;
+}
+
+.product-card {
+  box-shadow: 0 4px 16px rgba(44,36,22,0.04);
+}
+
+/* Stagger animations for products */
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.product-card {
+  animation: slideUpFade 0.7s ease both;
+}
+
+.product-card:nth-child(1) { animation-delay: 0.1s; }
+.product-card:nth-child(2) { animation-delay: 0.2s; }
+.product-card:nth-child(3) { animation-delay: 0.3s; }
+.product-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  .products-hero-section {
+    padding: 120px 24px 60px;
+  }
+  
+  .product-body-cols {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  .specs-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+}
