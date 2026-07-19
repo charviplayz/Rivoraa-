@@ -1,8 +1,4 @@
-/* ============================================================
-   Rivoraa Organics — script.js
-   ============================================================ */
 
-/* ── 1. NAV: Shrink on scroll + active link highlighting ── */
 (function () {
   const nav = document.querySelector('nav');
 
@@ -356,7 +352,77 @@
 })();
 
 
-/* ── 8. TRUST BAR AUTO-SCROLL on mobile ── */
+
+/* ── CONTACT MODAL ── */
+(function () {
+    const modal      = document.getElementById("contactModal");
+    const openBtn    = document.getElementById("contactBtn");
+    const closeBtn   = document.querySelector(".close");
+    const form       = document.getElementById("contactForm");
+    const successEl  = document.getElementById("contactSuccess");
+    const closeSucBtn = document.getElementById("closeSuccessBtn");
+
+    if (!modal || !openBtn) return;
+
+        console.log(modal);
+         console.log(openBtn);
+
+    /* Open */
+    openBtn.addEventListener("click", function () {
+        modal.style.display = "flex";
+        form && (form.style.display = "");
+        successEl && (successEl.style.display = "none");
+        document.body.style.overflow = "hidden";
+    });
+
+    /* Close helpers */
+    function closeModal() {
+        modal.style.display = "none";
+        document.body.style.overflow = "";
+        if (form) { form.reset(); form.style.display = ""; }
+        if (successEl) successEl.style.display = "none";
+    }
+
+    if (closeBtn)   closeBtn.addEventListener("click",   closeModal);
+    if (closeSucBtn) closeSucBtn.addEventListener("click", closeModal);
+
+    /* Close on overlay click */
+    modal.addEventListener("click", function (e) {
+        if (e.target === modal) closeModal();
+    });
+
+    /* Close on Escape */
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && modal.style.display === "flex") closeModal();
+    });
+
+    /* Form submit */
+    if (form) {
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const btnText    = form.querySelector(".send-btn-text");
+            const btnLoading = form.querySelector(".send-btn-loading");
+            const submitBtn  = form.querySelector("button[type=submit]");
+
+            /* Loading state */
+            if (btnText)    btnText.style.display    = "none";
+            if (btnLoading) btnLoading.style.display  = "";
+            submitBtn.disabled = true;
+
+            /* Simulate send */
+            setTimeout(function () {
+                form.style.display     = "none";
+                if (successEl) successEl.style.display = "";
+                /* Reset button for next time */
+                if (btnText)    btnText.style.display    = "";
+                if (btnLoading) btnLoading.style.display  = "none";
+                submitBtn.disabled = false;
+            }, 1200);
+        });
+    }
+})();
+
 (function () {
   const trustBar = document.querySelector('.trust-bar');
   if (!trustBar) return;
@@ -405,3 +471,5 @@
   `;
   document.head.appendChild(style);
 })();
+
+
