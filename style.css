@@ -712,7 +712,7 @@
 
 .send-btn {
     width: 100%;
-    background: linear-gradient(135deg, #2D5A27 0%, #1E4020 100%);
+    background: linear-gradient(135deg, #40321b 0%, #413520 100%);
     color: #fff;
     border: none;
     padding: 13px 20px;
@@ -736,7 +736,7 @@
 .success-icon {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, #2D5A27, #4A8A3F);
+    background: linear-gradient(135deg, #413520,#413520);
     border-radius: 50%;
     display: flex;
     align-items: center;
