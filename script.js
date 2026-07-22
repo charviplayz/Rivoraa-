@@ -353,20 +353,35 @@
 
 
 
-/* ── CONTACT MODAL ── */
-(function () {
-    const modal      = document.getElementById("contactModal");
-    const openBtn    = document.getElementById("contactBtn");
-    const closeBtn   = document.querySelector(".close");
-    const form       = document.getElementById("contactForm");
-    const successEl  = document.getElementById("contactSuccess");
-    const closeSucBtn = document.getElementById("closeSuccessBtn");
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-    if (!modal || !openBtn) return;
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        message: document.getElementById("message").value
+    };
 
-        console.log(modal);
-         console.log(openBtn);
+    try {
+        const response = await fetch("http://127.0.0.1:8000/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
+        const result = await response.json();
+
+        alert(result.message);
+
+        this.reset();
+
+    } catch (error) {
+        alert("Unable to connect to the server.");
+        console.error(error);
+    }
+});
     /* Open */
     openBtn.addEventListener("click", function () {
         modal.style.display = "flex";
