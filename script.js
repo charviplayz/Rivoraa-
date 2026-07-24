@@ -411,32 +411,35 @@ document.getElementById("contactForm").addEventListener("submit", async function
         if (e.key === "Escape" && modal.style.display === "flex") closeModal();
     });
 
-    /* Form submit */
-    if (form) {
-        form.addEventListener("submit", function (e) {
-            e.preventDefault();
 
-            const btnText    = form.querySelector(".send-btn-text");
-            const btnLoading = form.querySelector(".send-btn-loading");
-            const submitBtn  = form.querySelector("button[type=submit]");
+ const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+    contactForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
 
-            /* Loading state */
-            if (btnText)    btnText.style.display    = "none";
-            if (btnLoading) btnLoading.style.display  = "";
-            submitBtn.disabled = true;
+        const data = {
+            name: document.getElementById("contactName").value,
+            email: document.getElementById("contactEmail").value,
+            message: document.getElementById("contactMessage").value
+        };
 
-            /* Simulate send */
-            setTimeout(function () {
-                form.style.display     = "none";
-                if (successEl) successEl.style.display = "";
-                /* Reset button for next time */
-                if (btnText)    btnText.style.display    = "";
-                if (btnLoading) btnLoading.style.display  = "none";
-                submitBtn.disabled = false;
-            }, 1200);
-        });
-    }
-})();
+        try {
+            const response = await fetch("http://127.0.0.1:8000/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+            alert(result.message);
+            this.reset();
+
+        } catch (error) {
+            alert("Unable to connect to the server.");
+            console.error(error);
+        }
+    });
+}
 
 (function () {
   const trustBar = document.querySelector('.trust-bar');
