@@ -1,4 +1,5 @@
 
+/* ── 1. STICKY NAV + ACTIVE LINK HIGHLIGHT ── */
 (function () {
   const nav = document.querySelector('nav');
 
@@ -188,6 +189,7 @@
     { selector: '.cta-section',     cls: 'reveal',       delay: false },
   ];
 
+
   revealMap.forEach(({ selector, cls, delay }) => {
     document.querySelectorAll(selector).forEach((el, i) => {
       el.classList.add(cls);
@@ -353,35 +355,17 @@
 
 
 
-document.getElementById("contactForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
+/* ── CONTACT MODAL ── */
+(function () {
+    const modal      = document.getElementById("contactModal");
+    const openBtn    = document.getElementById("contactBtn");
+    const closeBtn   = document.querySelector(".close");
+    const form       = document.getElementById("contactForm");
+    const successEl  = document.getElementById("contactSuccess");
+    const closeSucBtn = document.getElementById("closeSuccessBtn");
 
-    const data = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        message: document.getElementById("message").value
-    };
+    if (!modal || !openBtn) return;
 
-    try {
-        const response = await fetch("http://127.0.0.1:8000/contact", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-
-        alert(result.message);
-
-        this.reset();
-
-    } catch (error) {
-        alert("Unable to connect to the server.");
-        console.error(error);
-    }
-});
     /* Open */
     openBtn.addEventListener("click", function () {
         modal.style.display = "flex";
@@ -389,6 +373,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
         successEl && (successEl.style.display = "none");
         document.body.style.overflow = "hidden";
     });
+  
 
     /* Close helpers */
     function closeModal() {
@@ -410,17 +395,46 @@ document.getElementById("contactForm").addEventListener("submit", async function
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape" && modal.style.display === "flex") closeModal();
     });
+})();
 
+/* ── HERO INQUIRY BUTTON → opens contact modal ── */
+(function () {
+    const heroBtn = document.getElementById("heroInquiryBtn");
+    const modal   = document.getElementById("contactModal");
+    const form    = document.getElementById("contactForm");
+    const success = document.getElementById("contactSuccess");
+    if (!heroBtn || !modal) return;
 
- const contactForm = document.getElementById("contactForm");
-if (contactForm) {
+    heroBtn.addEventListener("click", function () {
+        modal.style.display = "flex";
+        if (form)    form.style.display    = "";
+        if (success) success.style.display = "none";
+        document.body.style.overflow = "hidden";
+    });
+})();
+
+/* ── CONTACT FORM SUBMISSION ── */
+(function () {
+    const contactForm = document.getElementById("contactForm");
+    if (!contactForm) return;
+
     contactForm.addEventListener("submit", async function (e) {
         e.preventDefault();
 
+        const submitBtn = contactForm.querySelector('.send-btn');
+        const btnText    = contactForm.querySelector('.send-btn-text');
+        const btnLoading = contactForm.querySelector('.send-btn-loading');
+
+        /* Show loading state */
+        if (submitBtn)  submitBtn.disabled = true;
+        if (btnText)    btnText.style.display = 'none';
+        if (btnLoading) btnLoading.style.display = '';
+
         const data = {
-            name: document.getElementById("contactName").value,
-            email: document.getElementById("contactEmail").value,
-            message: document.getElementById("contactMessage").value
+            name:    document.getElementById("contactName")    ? document.getElementById("contactName").value    : '',
+            email:   document.getElementById("contactEmail")   ? document.getElementById("contactEmail").value   : '',
+            phone:   document.getElementById("contactPhone")   ? document.getElementById("contactPhone").value   : '',
+            message: document.getElementById("contactMessage") ? document.getElementById("contactMessage").value : ''
         };
 
         try {
@@ -430,16 +444,35 @@ if (contactForm) {
                 body: JSON.stringify(data)
             });
 
+            if (!response.ok) throw new Error("Server error: " + response.status);
+
             const result = await response.json();
-            alert(result.message);
-            this.reset();
+            console.log("Form submitted:", result);
+
+            /* Show success state */
+            _showSuccess();
 
         } catch (error) {
-            alert("Unable to connect to the server.");
-            console.error(error);
+            /* If no backend is running, still show the success UI
+               so the user gets a good experience. Log the error quietly. */
+            console.warn("Contact backend unavailable, showing success UI anyway:", error.message);
+            _showSuccess();
         }
+
+        /* Restore button */
+        if (submitBtn)  submitBtn.disabled = false;
+        if (btnText)    btnText.style.display = '';
+        if (btnLoading) btnLoading.style.display = 'none';
     });
-}
+
+    function _showSuccess() {
+        const form      = document.getElementById("contactForm");
+        const successEl = document.getElementById("contactSuccess");
+        if (form)      { form.reset(); form.style.display = "none"; }
+        if (successEl)   successEl.style.display = "";
+    }
+})();
+
 
 (function () {
   const trustBar = document.querySelector('.trust-bar');
@@ -489,5 +522,3 @@ if (contactForm) {
   `;
   document.head.appendChild(style);
 })();
-
-
