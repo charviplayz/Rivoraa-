@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rivoraa Organics — Premium Dehydrated Vegetable Powders</title>
+    <meta name="description" content="Rivoraa Organics supplies premium dehydrated vegetable powders — Potato, Ginger, Garlic &amp; Onion — for food manufacturers, exporters &amp; hospitality businesses. FSSAI licensed, APEDA registered, GST compliant. Based in Ghaziabad, India." />
     <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
@@ -52,7 +53,7 @@
           <span class="pill">🧅 Onion Powder</span>
         </div>
         <div class="hero-buttons">
-          <button class="btn-primary" onclick="document.getElementById('contactModal').style.display='flex'; document.getElementById('contactForm').style.display=''; document.getElementById('contactSuccess').style.display='none'; document.body.style.overflow='hidden';">Request Bulk Inquiry</button>
+          <button class="btn-primary" id="heroInquiryBtn">Request Bulk Inquiry</button>
           <a href="#products" class="btn-outline">Explore Products</a>
         </div>
       </div>
@@ -252,7 +253,6 @@
           <!-- POTATO -->
           <div class="product-card simple-card">
             <div class="simple-card-img">
-              <img src="" alt="Potato Powder" />
               <div class="simple-card-emoji">🥔</div>
             </div>
             <div class="simple-card-body">
@@ -272,7 +272,6 @@
           <!-- GINGER -->
           <div class="product-card simple-card">
             <div class="simple-card-img">
-              <img src="" alt="Ginger Powder" />
               <div class="simple-card-emoji">🫚</div>
             </div>
             <div class="simple-card-body">
@@ -292,7 +291,6 @@
           <!-- GARLIC -->
           <div class="product-card simple-card">
             <div class="simple-card-img">
-              <img src="" alt="Garlic Powder" />
               <div class="simple-card-emoji">🧄</div>
             </div>
             <div class="simple-card-body">
@@ -312,7 +310,6 @@
           <!-- ONION -->
           <div class="product-card simple-card">
             <div class="simple-card-img">
-              <img src="" alt="Onion Powder" />
               <div class="simple-card-emoji">🧅</div>
             </div>
             <div class="simple-card-body">
@@ -526,7 +523,7 @@
   <!-- Buttons -->
   <div class="cta-buttons">
       <button class="quote-btn">REQUEST A QUOTE</button>
-      <button id="contactBtn" class="contact-btn" onclick="document.getElementById('contactModal').style.display='flex'; document.getElementById('contactForm').style.display=''; document.getElementById('contactSuccess').style.display='none'; document.body.style.overflow='hidden';">✉ CONTACT OUR TEAM</button>
+      <button id="contactBtn" class="contact-btn">✉ CONTACT OUR TEAM</button>
   </div>
 
     </section>
@@ -542,7 +539,7 @@
                 <h2 id="contactModalTitle">Contact Our Team</h2>
                 <p class="modal-subtitle">We'll get back to you within 24 hours</p>
             </div>
-            <button class="close" aria-label="Close" onclick="document.getElementById('contactModal').style.display='none'; document.body.style.overflow='';">&times;</button>
+            <button class="close" aria-label="Close">×</button>
         </div>
 
         <!-- Form -->
@@ -580,7 +577,7 @@
             <div class="success-icon">✓</div>
             <h3>Message Sent!</h3>
             <p>Thank you for reaching out. Our team will contact you within 24 hours.</p>
-            <button class="send-btn" id="closeSuccessBtn" style="margin-top:8px;" type="button" onclick="document.getElementById('contactModal').style.display='none'; document.body.style.overflow='';">Close</button>
+            <button class="send-btn" id="closeSuccessBtn" style="margin-top:8px;" type="button">Close</button>
         </div>
 
     </div>
@@ -673,7 +670,6 @@
       </div>
     </footer>
     <script src="script.js"></script>
-    <!-- <script src="contact.js"></script> -->
   </body>
 </html>
 
