@@ -579,6 +579,7 @@
     align-items: center;
     z-index: 9999;
     padding: 20px;
+    overflow-y: auto;
 }
 
 .modal-content {
@@ -590,6 +591,7 @@
     position: relative;
     box-shadow: 0 24px 64px rgba(20, 16, 10, 0.35);
     animation: modal-popup 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    margin: auto;
 }
 
 @keyframes modal-popup {
@@ -692,7 +694,7 @@
     border: 1.5px solid #E0D8CC;
     border-radius: 8px;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.88rem;
+    font-size: 1rem;
     color: #2C2416;
     background: #FAFAF7;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -701,7 +703,7 @@
 }
 .modal-content input:focus,
 .modal-content textarea:focus {
-    border-color: #2D5A27;
+    border-color: #2C2416;
     box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.12);
     background: #fff;
 }
@@ -736,7 +738,7 @@
 .success-icon {
     width: 64px;
     height: 64px;
-    background: linear-gradient(135deg, #413520,#413520);
+    background: linear-gradient(135deg, #413520, #413520);
     border-radius: 50%;
     display: flex;
     align-items: center;
