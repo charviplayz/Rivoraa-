@@ -7,12 +7,17 @@
     <meta name="description" content="Rivoraa Organics supplies premium dehydrated vegetable powders — Potato, Ginger, Garlic &amp; Onion — for food manufacturers, exporters &amp; hospitality businesses. FSSAI licensed, APEDA registered, GST compliant. Based in Ghaziabad, India." />
     <link rel="stylesheet" href="style.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300..700;1,300..700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
   </head>
   
   <body>
+    <div class="custom-cursor"></div>
+    <div class="custom-cursor-follower"></div>
+    <div class="scroll-progress"></div>
+    <div class="grain-overlay"></div>
+
     <!-- NAV -->
     <nav>
       <a href="#" class="nav-logo">
@@ -33,6 +38,7 @@
 
     <!-- HERO -->
     <section class="hero" id="home">
+      <canvas id="hero-particles"></canvas>
       <div class="hero-left">
         <p class="hero-eyebrow">Export-Ready Ingredients</p>
         <h1 class="hero-title">
@@ -538,7 +544,7 @@
             <div>
                 <h2 id="contactModalTitle">Contact Our Team</h2>
                 <p class="modal-subtitle">We'll get back to you within 24 hours</p>
-            </div>
+            </div>v
             <button class="close" aria-label="Close">×</button>
         </div>
 
