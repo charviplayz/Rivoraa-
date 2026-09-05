@@ -1,7 +1,4 @@
-/* ════════════════════════════════════════════════════════════
-   RIVORAA ORGANICS — ANIMATION SYSTEM
-   "Make it feel human"
-   ════════════════════════════════════════════════════════════ */
+
 
 /* ── 1. CUSTOM ORGANIC CURSOR ── */
 (function () {
