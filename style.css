@@ -2,17 +2,17 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --cream: #F5F0E8;
-    --warm-white: #FAFAF7;
-    --earth: #2C2416;
-    --bark: #5C4A2A;
-    --sage: #7A8C6E;
-    --gold: #C49A3C;
-    --gold-light: #E8C97A;
-    --terracotta: #C4623A;
-    --powder: #E8DDD0;
-    --muted: #8A7D6A;
-    --border: rgba(92,74,42,0.15);
+    --cream: #1A1510;
+    --warm-white: #2C2416;
+    --earth: #efe3d2;
+    --bark: #d9c4a9;
+    --sage: #A3B896;
+    --gold: #E8C97A;
+    --gold-light: #f5e2a3;
+    --terracotta: #e07f55;
+    --powder: #3a3022;
+    --muted: #b5a999;
+    --border: rgba(239,227,210,0.15);
     
     --spring-soft: cubic-bezier(0.22, 1, 0.36, 1);
     --spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -36,9 +36,9 @@
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 60px;
-    background: white;
-    border-bottom: 2px solid #2D5A27;
-    box-shadow: 0 2px 16px rgba(45,90,39,0.10);
+    background: var(--warm-white);
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.20);
     transition: all 0.3s;
     height: 85px;
   }
