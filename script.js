@@ -1,5 +1,3 @@
-
-
 /* ── 1. CUSTOM ORGANIC CURSOR ── */
 (function () {
   const dot  = document.createElement('div');
@@ -134,7 +132,7 @@
     }
     .nav-burger span {
       display: block; width: 24px; height: 2px;
-      background: #2D5A27; border-radius: 2px;
+      background: var(--earth); border-radius: 2px;
       transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -250,82 +248,58 @@
 
 /* ── 7. HERO SUBTITLE + TAGLINE REVEAL ── */
 (function () {
-  /* CSS fadeUp animations already handle these — no JS override needed */
-})();
+  const subtitle = document.querySelector('.hero-subtitle');
+  const tagline  = document.querySelector('.hero-tagline');
+  const strip    = document.querySelector('.hero-products-strip');
+  const buttons  = document.querySelector('.hero-buttons');
 
+  const items = [
+    { el: subtitle, delay: 500 },
+    { el: tagline,  delay: 650 },
+    { el: strip,    delay: 800 },
+    { el: buttons,  delay: 950 },
+  ];
+
+  items.forEach(({ el, delay }) => {
+    if (!el) return;
+    el.style.opacity  = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+    setTimeout(() => {
+      el.style.opacity   = '1';
+      el.style.transform = 'translateY(0)';
+    }, delay);
+  });
+})();
 
 
 /* ── 8. HERO VISUAL GRID ENTRANCE ── */
 (function () {
-  /* CSS fadeUp animation already handles this — no JS override needed */
+  const grid  = document.querySelector('.hero-visual-grid');
+  const cards = document.querySelectorAll('.product-card-mini');
+  if (!grid) return;
+
+  grid.style.opacity = '0';
+  grid.style.transform = 'translateX(30px)';
+  grid.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s';
+
+  setTimeout(() => {
+    grid.style.opacity   = '1';
+    grid.style.transform = 'translateX(0)';
+  }, 100);
+
+  /* Stagger each card inside */
+  cards.forEach((card, i) => {
+    card.style.opacity   = '0';
+    card.style.transform = 'translateY(24px) scale(0.95)';
+    card.style.transition = `opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.4 + i * 0.1}s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.4 + i * 0.1}s`;
+    setTimeout(() => {
+      card.style.opacity   = '1';
+      card.style.transform = '';
+    }, 100);
+  });
 })();
 
-
-
-/* ── 9. AMBIENT PARTICLE CANVAS (Hero) ── */
-(function () {
-  const heroRight = document.querySelector('.hero-right');
-  if (!heroRight) return;
-
-  const canvas = document.createElement('canvas');
-  canvas.id = 'hero-canvas';
-  heroRight.prepend(canvas);
-
-  const ctx = canvas.getContext('2d');
-  let W, H, particles;
-
-  function resize() {
-    W = canvas.width  = heroRight.offsetWidth;
-    H = canvas.height = heroRight.offsetHeight;
-    initParticles();
-  }
-
-  class Particle {
-    constructor() { this.reset(true); }
-    reset(first) {
-      this.x  = Math.random() * W;
-      this.y  = first ? Math.random() * H : H + 10;
-      this.r  = Math.random() * 2.5 + 0.5;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = -(Math.random() * 0.4 + 0.15);
-      this.alpha = Math.random() * 0.5 + 0.1;
-      this.fade  = Math.random() * 0.003 + 0.001;
-      this.color = Math.random() > 0.5
-        ? `rgba(196, 154, 60, ${this.alpha})`   /* gold */
-        : `rgba(122, 140, 110, ${this.alpha})`; /* sage */
-    }
-    update() {
-      this.x += this.vx + Math.sin(Date.now() * 0.0005 + this.x) * 0.15;
-      this.y += this.vy;
-      this.alpha -= this.fade;
-      if (this.alpha <= 0 || this.y < -10) this.reset(false);
-    }
-    draw() {
-      ctx.save();
-      ctx.globalAlpha = Math.max(0, this.alpha);
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  function initParticles() {
-    particles = Array.from({ length: 40 }, () => new Particle());
-  }
-
-  let animId;
-  function tick() {
-    ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => { p.update(); p.draw(); });
-    animId = requestAnimationFrame(tick);
-  }
-
-  resize();
-  tick();
-  window.addEventListener('resize', resize, { passive: true });
-})();
 
 
 /* ── 10. PARALLAX HERO GRID ON SCROLL ── */
@@ -516,7 +490,7 @@
     .back-to-top {
       position: fixed; bottom: 32px; right: 32px;
       width: 48px; height: 48px;
-      background: linear-gradient(135deg, #2D5A27, #1E4020);
+      background: linear-gradient(135deg, var(--earth), var(--bark));
       color: white; border: none; border-radius: 50%;
       font-size: 1.2rem; cursor: pointer;
       opacity: 0; transform: translateY(20px) scale(0.8);
@@ -524,14 +498,14 @@
                   transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
                   box-shadow 0.3s;
       z-index: 500;
-      box-shadow: 0 4px 16px rgba(45,90,39,0.30);
+      box-shadow: 0 4px 16px rgba(44,36,22,0.30);
     }
     .back-to-top.visible {
       opacity: 1; transform: translateY(0) scale(1);
     }
     .back-to-top:hover {
       transform: translateY(-4px) scale(1.05) !important;
-      box-shadow: 0 10px 32px rgba(45,90,39,0.4);
+      box-shadow: 0 10px 32px rgba(44,36,22,0.4);
     }
     @media (max-width: 600px) {
       .back-to-top { bottom: 20px; right: 20px; }
@@ -606,26 +580,21 @@
 })();
 
 
-/* ── 20. HERO INQUIRY BUTTON + QUOTE BUTTON → OPENS MODAL ── */
+/* ── 20. HERO INQUIRY BUTTON → OPENS MODAL ── */
 (function () {
-  const heroBtn  = document.getElementById('heroInquiryBtn');
-  const quoteBtn = document.getElementById('quoteBtn');
-  const modal    = document.getElementById('contactModal');
-  const form     = document.getElementById('contactForm');
-  const success  = document.getElementById('contactSuccess');
+  const heroBtn = document.getElementById('heroInquiryBtn');
+  const modal   = document.getElementById('contactModal');
+  const form    = document.getElementById('contactForm');
+  const success = document.getElementById('contactSuccess');
+  if (!heroBtn || !modal) return;
 
-  function openContactModal() {
-    if (!modal) return;
+  heroBtn.addEventListener('click', () => {
     modal.style.display = 'flex';
     if (form)    form.style.display    = '';
     if (success) success.style.display = 'none';
     document.body.style.overflow = 'hidden';
-  }
-
-  if (heroBtn)  heroBtn.addEventListener('click',  openContactModal);
-  if (quoteBtn) quoteBtn.addEventListener('click', openContactModal);
+  });
 })();
-
 
 
 /* ── 21. CONTACT FORM SUBMISSION ── */
