@@ -250,57 +250,16 @@
 
 /* ── 7. HERO SUBTITLE + TAGLINE REVEAL ── */
 (function () {
-  const subtitle = document.querySelector('.hero-subtitle');
-  const tagline  = document.querySelector('.hero-tagline');
-  const strip    = document.querySelector('.hero-products-strip');
-  const buttons  = document.querySelector('.hero-buttons');
-
-  const items = [
-    { el: subtitle, delay: 500 },
-    { el: tagline,  delay: 650 },
-    { el: strip,    delay: 800 },
-    { el: buttons,  delay: 950 },
-  ];
-
-  items.forEach(({ el, delay }) => {
-    if (!el) return;
-    el.style.opacity  = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
-    setTimeout(() => {
-      el.style.opacity   = '1';
-      el.style.transform = 'translateY(0)';
-    }, delay);
-  });
+  /* CSS fadeUp animations already handle these — no JS override needed */
 })();
+
 
 
 /* ── 8. HERO VISUAL GRID ENTRANCE ── */
 (function () {
-  const grid  = document.querySelector('.hero-visual-grid');
-  const cards = document.querySelectorAll('.product-card-mini');
-  if (!grid) return;
-
-  grid.style.opacity = '0';
-  grid.style.transform = 'translateX(30px)';
-  grid.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s';
-
-  setTimeout(() => {
-    grid.style.opacity   = '1';
-    grid.style.transform = 'translateX(0)';
-  }, 100);
-
-  /* Stagger each card inside */
-  cards.forEach((card, i) => {
-    card.style.opacity   = '0';
-    card.style.transform = 'translateY(24px) scale(0.95)';
-    card.style.transition = `opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.4 + i * 0.1}s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) ${0.4 + i * 0.1}s`;
-    setTimeout(() => {
-      card.style.opacity   = '1';
-      card.style.transform = '';
-    }, 100);
-  });
+  /* CSS fadeUp animation already handles this — no JS override needed */
 })();
+
 
 
 /* ── 9. AMBIENT PARTICLE CANVAS (Hero) ── */
@@ -647,21 +606,26 @@
 })();
 
 
-/* ── 20. HERO INQUIRY BUTTON → OPENS MODAL ── */
+/* ── 20. HERO INQUIRY BUTTON + QUOTE BUTTON → OPENS MODAL ── */
 (function () {
-  const heroBtn = document.getElementById('heroInquiryBtn');
-  const modal   = document.getElementById('contactModal');
-  const form    = document.getElementById('contactForm');
-  const success = document.getElementById('contactSuccess');
-  if (!heroBtn || !modal) return;
+  const heroBtn  = document.getElementById('heroInquiryBtn');
+  const quoteBtn = document.getElementById('quoteBtn');
+  const modal    = document.getElementById('contactModal');
+  const form     = document.getElementById('contactForm');
+  const success  = document.getElementById('contactSuccess');
 
-  heroBtn.addEventListener('click', () => {
+  function openContactModal() {
+    if (!modal) return;
     modal.style.display = 'flex';
     if (form)    form.style.display    = '';
     if (success) success.style.display = 'none';
     document.body.style.overflow = 'hidden';
-  });
+  }
+
+  if (heroBtn)  heroBtn.addEventListener('click',  openContactModal);
+  if (quoteBtn) quoteBtn.addEventListener('click', openContactModal);
 })();
+
 
 
 /* ── 21. CONTACT FORM SUBMISSION ── */
